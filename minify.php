@@ -46,7 +46,7 @@ if (isset($_POST['add_task'])) {
         $.post('test.php', { add_task : 1, name :taskName.val(), price : +taskTime.html() }, data => location.reload() )
     })
     $('.day_end').on('click', () => {
-        $.post('test.php', { day_end : 1 }, data => { alert('TO PAY: ' + data + ' $ ');  location.reload() })
+        $.post('test.php', { day_end : 1 }, data => { alert(`TO PAY:${data} $`);  location.reload() })
     })
 
 </script>

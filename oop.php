@@ -45,8 +45,9 @@ class Tasker {
         this.taskName =  $('.task_name')
         this.#addEvents()
     }
-
-    /******** Handlers ********/
+     /***************
+       Handlers
+     ***************/
     #addEvents = () => {
         $('.task_start').on('click', this.taskStart)
         $('.task_pause').on('click', this.taskPause)
@@ -54,8 +55,9 @@ class Tasker {
         $('.day_end').on('click', this.dayEnd)
 
     }
-
-    /******** Methhods ********/
+    /***************
+        Methods
+    ***************/
     taskStart = (name) => {
 
         if (!this.taskName.val() && typeof name !== 'string'){
@@ -64,38 +66,32 @@ class Tasker {
 
         !this.time_counter ? this.time_counter = setInterval(() => this.taskTime.html( +this.taskTime.html() + 1 ) , 1000) : {}
     }
-
     taskPause = () => {
         clearInterval(this.time_counter)
         this.time_counter = false
     }
-
     #renderList = () => {
         $('.works_list').append(`<div class="work_done">${ this.taskName.val() } - <span class="price_done">${  +this.taskTime.html()  }</span></div>`)
     }
-
     #clearData = () => {
         this.taskTime.html('0')
         this.taskName.val('')
     }
-
    #addTask = () => {
         $.post('test.php', { add_task : 1, name :this.taskName.val(), price : +this.taskTime.html() }, data =>  console.log(data) )
     }
-
     taskFinish = () => {
         this.taskPause()
         this.#renderList()
         this.#addTask()
         this.#clearData()
     }
-
     dayEnd(){
-        $.post('test.php', { day_end : 1 }, data => { alert('TO PAY: ' + data + ' $ ');  location.reload()})
+        $.post('test.php', { day_end : 1 }, data => { alert(`TO PAY:${data} $`);  location.reload() })
     }
 
 }
-    /*** Init  ****/
+    /*** Init ****/
     const tasker = new Tasker()
 
     /******** Exemple controls *******/

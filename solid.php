@@ -61,7 +61,7 @@ if (isset($_POST['add_task'])) {
     }
 
     const dayEnd = () => {
-        $.post('test.php', { day_end : 1 }, data => { alert('TO PAY: ' + data + ' $ ');  location.reload()})
+        $.post('test.php', { day_end : 1 }, data => { alert(`TO PAY:${data} $`);  location.reload()})
     }
     /******* Handlers ********/
     $('.task_start').on('click', taskStart)
